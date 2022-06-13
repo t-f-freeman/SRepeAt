@@ -2,10 +2,10 @@
 
 /*
 ---------------------------------------------------------------------
-    trev-f/SRAlign
+    t-f-freeman/SRepeAt
 ---------------------------------------------------------------------
-SRAlign - A flexible pipeline for short read alignment to a reference.
-https://github.com/trev-f/SRAlign
+SRepeAt - A pipeline for analyzing repeat elements. Built on SRAlign.
+https://github.com/t-f-freeman/SRepeAt
 */
 
 nextflow.enable.dsl=2
@@ -16,8 +16,8 @@ nextflow.enable.dsl=2
 ---------------------------------------------------------------------
 */
 
-include { SRAlign } from './workflows/SRAlign.nf'
+include { SRepeAt } from "${projectDir}/workflows/SRepeAt.nf"
 
 workflow {
-    SRAlign()
+    SRepeAt()
 }
