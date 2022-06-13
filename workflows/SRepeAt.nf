@@ -1,6 +1,6 @@
 /*
 =====================================================================
-    SRAlign WORKFLOW
+    SRepeAt WORKFLOW
 =====================================================================
 */
 
@@ -49,7 +49,7 @@ include { DeepToolsMultiBamSWF  as DeepToolsMultiBam  } from "${projectDir}/subw
 include { FullMultiQC           as FullMultiQC        } from "${baseDir}/modules/misc/FullMultiQC.nf"
 
 
-workflow SRAlign {
+workflow SRepeAt {
     /*
     ---------------------------------------------------------------------
         Read design file, parse sample names and identifiers, and stage reads files
