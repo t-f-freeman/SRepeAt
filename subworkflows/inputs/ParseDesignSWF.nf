@@ -10,8 +10,11 @@ workflow ParseDesignSWF {
             design
         )
             .csv
+            .view { "csv: ${it}" }
             .splitCsv(header:true, sep:',')
+            .view { "Split csv: ${it}" }
             .map { createDesignChannel(it) }
+            .view { "Created design channel: ${it}" }
             .branch {
                 reads: it[1].any { it =~ /(fastq|fq)/ }   // add channels with fastq files (either fastq or fq) to reads channel
                 bams:  it[1].any { it =~ /\.bam$/ }       // add channels with bams to bams channel
@@ -52,6 +55,9 @@ def createDesignChannel(LinkedHashMap row) {
         // create an empty list for tool IDs for suffixes
         toolIDs = []
 
+        /*
+        log.info "Workflow introspection for stub run: ${workflow.stubRun}"
+
         // check that reads files exist
         if (!workflow.stubRun) {        // ignore file checking for stub-run executions
             reads.each {
@@ -60,6 +66,7 @@ def createDesignChannel(LinkedHashMap row) {
                 }
             }
         }
+        */
 
         return [metadata, reads, toolIDs]
     }
@@ -77,6 +84,8 @@ def createDesignChannel(LinkedHashMap row) {
         // create an empty list for tool IDs for suffixes
         toolIDs = row.tool_IDs.split('_')
 
+        /*
+
         // check that reads files exist
         if (!workflow.stubRun) {        // ignore file checking for stub-run executions
             bam.each {
@@ -85,6 +94,7 @@ def createDesignChannel(LinkedHashMap row) {
                 }
             }
         }
+        */
 
         return [metadata, bam, toolIDs]
     }
