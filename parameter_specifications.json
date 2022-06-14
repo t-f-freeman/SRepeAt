@@ -93,7 +93,7 @@
         "title" : "Alignment parameters",
         "parameters" : {
             "alignmentTool" : {
-                "default"     : "bowtie2",
+                "default"     : "hisat2",
                 "description" : "Tool to use for alignment to reference. The same tool is used to align to both genome and contaminant."
             },
             "forceAlignRawReads" : {
@@ -105,7 +105,7 @@
                 "description" : "Use the provided HISAT2 index if it is supplied."
             },
             "buildSpliceAwareIndex" : {
-                "default"     : false,
+                "default"     : true,
                 "description" : "Build the alignment tool index in a splice-aware manner (for aligners where this is possible)."
             },
             "skipAlignGenome" : {
@@ -134,7 +134,7 @@
         "title" : "Library complexity parameters",
         "parameters" : {
             "skipPreseq"    : {
-                "default"     : false,
+                "default"     : true,
                 "description" : "Skip Preseq.",
                 "skip"        : true
             }
