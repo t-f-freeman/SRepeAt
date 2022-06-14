@@ -10,11 +10,8 @@ workflow ParseDesignSWF {
             design
         )
             .csv
-            .view { "csv: ${it}" }
             .splitCsv(header:true, sep:',')
-            .view { "Split csv: ${it}" }
             .map { createDesignChannel(it) }
-            .view { "Created design channel: ${it}" }
             .branch {
                 reads: it[1].any { it =~ /(fastq|fq)/ }   // add channels with fastq files (either fastq or fq) to reads channel
                 bams:  it[1].any { it =~ /\.bam$/ }       // add channels with bams to bams channel
