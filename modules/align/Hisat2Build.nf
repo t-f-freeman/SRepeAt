@@ -9,6 +9,7 @@ process Hisat2Build {
 
     container 'quay.io/biocontainers/hisat2:2.2.1--h87f3376_4'
 
+    label 'cpu_mid'
     label 'mem_high'
 
     input:
