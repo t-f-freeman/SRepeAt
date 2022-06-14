@@ -34,23 +34,23 @@ class SRAlignWorkflow {
     // pipeline ASCII logo
     public static final String pipelineLogo = (
         """
-         ######  ########     ###    ##       ####  ######   ##    ## 
-        ##    ## ##     ##   ## ##   ##        ##  ##    ##  ###   ## 
-        ##       ##     ##  ##   ##  ##        ##  ##        ####  ## 
-         ######  ########  ##     ## ##        ##  ##   #### ## ## ## 
-              ## ##   ##   ######### ##        ##  ##    ##  ##  #### 
-        ##    ## ##    ##  ##     ## ##        ##  ##    ##  ##   ### 
-         ######  ##     ## ##     ## ######## ####  ######   ##    ## 
+         ######  ########  ######## ########  ########    ###    ######## 
+        ##    ## ##     ## ##       ##     ## ##         ## ##      ##    
+        ##       ##     ## ##       ##     ## ##        ##   ##     ##    
+         ######  ########  ######   ########  ######   ##     ##    ##    
+              ## ##   ##   ##       ##        ##       #########    ##    
+        ##    ## ##    ##  ##       ##        ##       ##     ##    ##    
+         ######  ##     ## ######## ##        ######## ##     ##    ##    
         """
     )
 
     // pipeline name
-    public static final String pipelineName = "trev-f/SRAlign"
+    public static final String pipelineName = "t-f-freeman/SRepeAt"
 
     // purpose statement
     public static final String purpose = (
         """
-        A flexible pipeline for short read alignment to a reference with extensive QC reporting.
+        A pipeline for analyzing repeat elements. Built on SRAlign.
         """
     )
 
