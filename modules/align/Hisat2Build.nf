@@ -32,6 +32,7 @@ process Hisat2Build {
         if (!spliceAware) {
             """
             hisat2-build \
+                -p ${task.cpus} \
                 ${options} \
                 ${reference} \
                 ${ht2Base}
@@ -42,6 +43,7 @@ process Hisat2Build {
             hisat2_extract_exons.py        ${genes} > exons.txt
 
             hisat2-build \
+                -p ${task.cpus} \
                 --ss splicesites.txt \
                 --exon exons.txt \
                 ${options} \
