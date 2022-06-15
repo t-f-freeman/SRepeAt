@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Genome annotations, e.g. genes and dfam repeats hits
+- Multithreading to HISAT2 index building
 
 ### Changed
 
@@ -15,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 ### Fixed
+- Slow alignment using HISAT2 by increasing number of CPUs available.
 
 ### Security
 
