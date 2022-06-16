@@ -1,7 +1,7 @@
 process Fastp {
     tag "${metadata.sampleName}"
 
-    label 'mem_mid'
+    label 'mem_high'
     label 'cpu_mid'
 
     container 'quay.io/biocontainers/fastp:0.23.2--h79da9fb_0'
@@ -17,6 +17,9 @@ process Fastp {
         toolIDs += 'fsp'
         suffix = toolIDs ? "__${toolIDs.join('_')}" : ''
 
+        // set arguments
+        def options = task.ext.args ?: ''
+
         if (metadata.readType == 'single') {
             // set adapter sequence
             adapterTrim = params.adapterR1 ? "--adapter_sequence ${params.adapterR1}" : ''
@@ -24,6 +27,7 @@ process Fastp {
             """
             fastp \
                 --thread ${task.cpus} \
+                ${options} \
                 ${adapterTrim} \
                 -i ${reads} \
                 -o ${metadata.sampleName}${suffix}_R1.fastq.gz
@@ -36,6 +40,7 @@ process Fastp {
             """
             fastp \
                 --thread ${task.cpus} \
+                ${options} \
                 ${adapterTrimR1} \
                 ${adapterTrimR2} \
                 -i ${reads[0]} \
