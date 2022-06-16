@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Slow alignment using HISAT2 by increasing number of CPUs available.
+- HISAT2 build output only takes genome fasta and index files, no exon and splice site files.
 
 ### Security
 
