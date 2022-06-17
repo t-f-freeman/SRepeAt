@@ -1,11 +1,9 @@
-# SRAlign
-A flexible pipeline for short read alignment to a reference with extensive QC reporting.
+# SRepeAt
+A pipeline for analyzing repeat elements. Built on SRAlign.
 
 ## Introduction
 
-**SRAlign** is a [Nextflow](https://www.nextflow.io/) pipeline for aligning short reads to a reference. 
-
-**SRAlign** is designed to be highly flexible by allowing for the easy addition of tools to the pipeline as well as serving as a starting point for genomic analyses that rely on alignment of short reads to a reference.
+**SRepeAt** is a [Nextflow](https://www.nextflow.io/) pipeline for aligning short reads to a reference. 
 
 ## Pipeline overview
 
@@ -37,17 +35,17 @@ A flexible pipeline for short read alignment to a reference with extensive QC re
 
 1. [Install Nextflow](https://www.nextflow.io/docs/latest/getstarted.html)
 2. [Install Docker](https://docs.docker.com/engine/install/)
-3. Download **SRAlign**:
+3. Download **SRepeAt**:
     ```
-    git clone https://github.com/trev-f/SRAlign.git
+    git clone https://github.com/t-f-freeman/SRepeAt
     ```
-4. Run **SRAlign** in test mode:
+4. Run **SRepeAt** in test mode:
     ```
-    nextflow run SRAlign -profile test 
+    nextflow run SRepeAt -profile test 
     ```
 5. Run your analysis:
     ```
-    nextflow run SRAlign -profile docker --input <input.csv> --genome <valid genome key>
+    nextflow run SRepeAt -profile docker --input <input.csv> --genome <valid genome key>
     ```
 
 Detailed documentation can be found in [docs](docs/) and [usage](docs/usage.md)
