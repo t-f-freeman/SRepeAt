@@ -7,16 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Genome annotations, e.g. genes and dfam repeats hits
+- Multithreading to HISAT2 index building
+- Check that maximum resources aren't exceeded.
+- Helper script to create a new subworkflow template: `src/python/new_nf_subworkflow.py`
 
 ### Changed
+- Moved helper scripts from `general_utilities` submodule to a local subidrectory.
 
-### Deprecated
-
-### Removed
-
+## [1.0.2] - 2022-06-16
 ### Fixed
+- Git submodule structure changed to allow for downloading pipeline with `nextflow pull`
 
-### Security
+## [1.0.1] - 2022-06-16
+### Fixed
+- HISAT2 build output only takes genome fasta and index files, no exon and splice site files.
 
 ## [1.0.0] - 2022-06-13
 ### Added
@@ -27,19 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add splice-aware option for building HISAT2 index.
 
 ### Changed
-- Help message usage statement.
-- Help message parameter help message display.
-- Parameter specifications such as descriptions stored in `parameter_specifications.json`.
-- Combined raw and trimmed reads FastQC steps to avoid duplication of modules and subworkflows.
-- Only MultiQC reports use the unique prefix name to keep other processes from having to be repeated upon `-resume`.
 
 ### Deprecated
 
 ### Removed
 
-### Fixed
-- Made capitalization of SRAlign consistent (i.e. sralign to SRAlign).
-- README quick start message.
-- README pipeline overview.
-
-### Security
