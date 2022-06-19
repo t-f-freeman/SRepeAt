@@ -46,6 +46,7 @@ include { SeqtkSample           as SeqtkSample        } from "${baseDir}/modules
 include { ContaminantStatsQCSWF as ContaminantStatsQC } from "${baseDir}/subworkflows/align/ContaminantStatsQCSWF.nf"
 include { PreseqSWF             as Preseq             } from "${baseDir}/subworkflows/align/PreseqSWF.nf"
 include { DeepToolsMultiBamSWF  as DeepToolsMultiBam  } from "${projectDir}/subworkflows/align/DeepToolsMultiBamSWF.nf"
+include { FeatureCountsSWF      as FeatureCounts      } from "${projectDir}/subworkflows/counts/FeatureCountsSWF.nf"
 include { FullMultiQC           as FullMultiQC        } from "${baseDir}/modules/misc/FullMultiQC.nf"
 
 
@@ -263,6 +264,23 @@ workflow SRepeAt {
     ch_corMatrix = DeepToolsMultiBam.out.corMatrix
     ch_PCAMatrix = DeepToolsMultiBam.out.PCAMatrix
 
+
+    /*
+    ---------------------------------------------------------------------
+        Full pipeline MultiQC
+    ---------------------------------------------------------------------
+    */
+
+    // count reads in gene exons
+    FeatureCounts(
+        ch_alignmentsCollect.bam.collect(),
+        ch_alignmentsCollect.toolIDs.first(),
+        genome['genes'],
+        'exon',
+        outBasePrefix
+    )
+    ch_countsFeatureCounts  = FeatureCounts.out.countsFeatureCounts
+    ch_summaryFeatureCounts = FeatureCounts.out.summaryFeatureCounts
 
     /*
     ---------------------------------------------------------------------
