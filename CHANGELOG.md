@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Multithreading to HISAT2 index building
 - Check that maximum resources aren't exceeded.
 - Helper script to create a new subworkflow template: `src/python/new_nf_subworkflow.py`
+- Count reads in exons with `featureCounts`
 
 ### Changed
 - Moved helper scripts from `general_utilities` submodule to a local subidrectory.
