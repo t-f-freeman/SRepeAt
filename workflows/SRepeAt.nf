@@ -298,6 +298,11 @@ workflow SRepeAt {
         .concat(ch_preseqLcExtrap)
         .concat(ch_corMatrix)
         .concat(ch_PCAMatrix)
+        .concat(
+            ch_summaryFeatureCounts.map {
+                it[0]
+            }
+        )
     
     // set channel for MultiQC config file
     ch_multiqcConfig = file(params.multiqcConfig)

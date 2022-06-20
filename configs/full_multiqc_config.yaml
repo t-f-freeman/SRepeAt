@@ -6,6 +6,7 @@ run_modules:
   - preseq
   - deeptools
   - custom_content
+  - featureCounts
 
 module_order:
   - fastqc
@@ -13,6 +14,7 @@ module_order:
   - preseq
   - deeptools
   - custom_content
+  - featureCounts
 
 custom_data:
   pct_duplicate:
