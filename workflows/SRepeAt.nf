@@ -284,6 +284,20 @@ workflow SRepeAt {
     )
     ch_countsFeatureCountsGenes  = FeatureCountsGenes.out.countsFeatureCounts
     ch_summaryFeatureCountsGenes = FeatureCountsGenes.out.summaryFeatureCounts
+    /*
+    // count reads in repeats
+    FeatureCountsGenes(
+        ch_alignmentsCollect.bam.collect(),
+        ch_alignmentsCollect.toolIDs.first(),
+        genome['genes'],
+        'exon',
+        'gene_id',
+        outBasePrefix
+    )
+    ch_countsFeatureCountsGenes  = FeatureCountsGenes.out.countsFeatureCounts
+    ch_summaryFeatureCountsGenes = FeatureCountsGenes.out.summaryFeatureCounts
+    */
+
 
     
     if (!params.skipTelescope) {
