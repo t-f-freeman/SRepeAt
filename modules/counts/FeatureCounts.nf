@@ -12,22 +12,23 @@ process FeatureCounts {
     label 'cpu_mid'
     label 'mem_mid'
 
-    publishDir "${params.baseDirData}/counts/${featureType}", mode: 'copy', pattern: '*_srF.txt*'
+    publishDir "${params.baseDirData}/counts", mode: 'copy', pattern: '*.txt*'
 
     input:
         path bams
         val toolIDsBams
         path annotationFile
         val featureType
+        val attributeType
         val outName
 
     output:
-        tuple path('*_srF.txt'), val(toolIDsBams), emit: featCounts
-        tuple path('*_srF.txt.summary'), val(toolIDsBams), emit: featCountsSummary
+        tuple path('*txt'), val(toolIDsBams), emit: featCounts
+        tuple path('*txt.summary'), val(toolIDsBams), emit: featCountsSummary
 
     script:
         // set suffix
-        toolIDsBams += "srF"
+        toolIDsBams += "srF-${annotationFile.toString() - ~/.gtf?/}"
         suffix = toolIDsBams ? "__${toolIDsBams.join('_')}" : ''
 
         // set arguments
@@ -37,7 +38,8 @@ process FeatureCounts {
         featureCounts \
             -T ${task.cpus} \
             ${options} \
-            -a ${annotationFile} -F GTF -t ${featureType} \
+            -a ${annotationFile} -F GTF \
+            -t ${featureType} -g ${attributeType} \
             -o ${outName}${suffix}.txt \
             ${bams}
         """
