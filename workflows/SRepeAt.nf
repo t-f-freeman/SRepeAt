@@ -47,6 +47,7 @@ include { ContaminantStatsQCSWF as ContaminantStatsQC } from "${baseDir}/subwork
 include { PreseqSWF             as Preseq             } from "${baseDir}/subworkflows/align/PreseqSWF.nf"
 include { DeepToolsMultiBamSWF  as DeepToolsMultiBam  } from "${projectDir}/subworkflows/align/DeepToolsMultiBamSWF.nf"
 include { FeatureCountsSWF      as FeatureCounts      } from "${projectDir}/subworkflows/counts/FeatureCountsSWF.nf"
+include { TelescopeSWF          as Telescope          } from "${projectDir}/subworkflows/counts/TelescopeSWF.nf"
 include { FullMultiQC           as FullMultiQC        } from "${baseDir}/modules/misc/FullMultiQC.nf"
 
 
@@ -267,7 +268,7 @@ workflow SRepeAt {
 
     /*
     ---------------------------------------------------------------------
-        Full pipeline MultiQC
+        Count reads
     ---------------------------------------------------------------------
     */
 
@@ -281,6 +282,12 @@ workflow SRepeAt {
     )
     ch_countsFeatureCounts  = FeatureCounts.out.countsFeatureCounts
     ch_summaryFeatureCounts = FeatureCounts.out.summaryFeatureCounts
+
+    // count reads in repeats
+    Telescope(
+        ch_bamIndexedGenome,
+        genome['repeatMasker']
+    )
 
     /*
     ---------------------------------------------------------------------

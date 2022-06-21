@@ -112,7 +112,7 @@ class SRAlignWorkflow {
         checkTools(validTools, params)
 
         // check that input and MultiQC config are specified and exist
-        checkInputs(params)
+        // checkInputs(params)
 
         // check reference and contaminant genomes
         checkReferences(params)
