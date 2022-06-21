@@ -284,19 +284,19 @@ workflow SRepeAt {
     )
     ch_countsFeatureCountsGenes  = FeatureCountsGenes.out.countsFeatureCounts
     ch_summaryFeatureCountsGenes = FeatureCountsGenes.out.summaryFeatureCounts
-    /*
+
+
     // count reads in repeats
-    FeatureCountsGenes(
+    FeatureCountsRepeats(
         ch_alignmentsCollect.bam.collect(),
         ch_alignmentsCollect.toolIDs.first(),
-        genome['genes'],
+        genome['repeatMasker'],
         'exon',
-        'gene_id',
+        'transcript_id',
         outBasePrefix
     )
-    ch_countsFeatureCountsGenes  = FeatureCountsGenes.out.countsFeatureCounts
-    ch_summaryFeatureCountsGenes = FeatureCountsGenes.out.summaryFeatureCounts
-    */
+    ch_countsFeatureCountsRepeats  = FeatureCountsRepeats.out.countsFeatureCounts
+    ch_summaryFeatureCountsRepeats = FeatureCountsRepeats.out.summaryFeatureCounts
 
 
     
@@ -330,6 +330,12 @@ workflow SRepeAt {
                 it[0]
             }
         )
+        .concat(
+            ch_summaryFeatureCountsRepeats.map {
+                it[0]
+            }
+        )
+
     
     // set channel for MultiQC config file
     ch_multiqcConfig = file(params.multiqcConfig)
