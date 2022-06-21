@@ -19,6 +19,7 @@ process FeatureCounts {
         val toolIDsBams
         path annotationFile
         val featureType
+        val attributeType
         val outName
 
     output:
@@ -37,7 +38,8 @@ process FeatureCounts {
         featureCounts \
             -T ${task.cpus} \
             ${options} \
-            -a ${annotationFile} -F GTF -t ${featureType} \
+            -a ${annotationFile} -F GTF \
+            -t ${featureType} -g ${attributeType} \
             -o ${outName}${suffix}.txt \
             ${bams}
         """

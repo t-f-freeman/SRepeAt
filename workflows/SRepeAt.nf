@@ -278,6 +278,7 @@ workflow SRepeAt {
         ch_alignmentsCollect.toolIDs.first(),
         genome['genes'],
         'exon',
+        'gene_id',
         outBasePrefix
     )
     ch_countsFeatureCounts  = FeatureCounts.out.countsFeatureCounts
