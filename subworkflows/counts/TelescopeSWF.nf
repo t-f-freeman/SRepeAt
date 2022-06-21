@@ -4,18 +4,26 @@ Date   : 2022-06-20
 Purpose: Run Telescope: Assign reads to a single transposable element locus and count reads within repeats
 */
 
-process TelescopeSWF {
-    tag ""
+include { SamtoolsSortName    } from "${projectDir}/modules/align/SamtoolsSortName.nf"
+include { TelescopeBulkAssign } from "${projectDir}/modules/counts/TelescopeBulkAssign.nf"
 
-    container ''
+workflow TelescopeSWF {
+    take:
+        bamIndexed
+        repeatsGTF
 
-    publishDir "", mode: 'copy', pattern: ''
+    main:
+        // sort bam by name
+        SamtoolsSortName(
+            bamIndexed
+        )
 
-    input:
+        // run Telescope on sorted bam
+        TelescopeBulkAssign(
+            SamtoolsSortName.out.bamSortedName,
+            repeatsGTF
+        )
 
-    output:
-
-    script:
-        """
-        """
+    emit:
+        bamSortedName = SamtoolsSortName.out.bamSortedName
 }

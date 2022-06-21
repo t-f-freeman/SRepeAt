@@ -5,17 +5,28 @@ Purpose: Assign transposons to single loci
 */
 
 process TelescopeBulkAssign {
-    tag ""
+    tag "${metadata.sampleName}"
 
-    container ''
+    container 'quay.io/biocontainers/telescope:1.0.3--py36h14c3975_0'
 
-    publishDir "", mode: 'copy', pattern: ''
+    publishDir "${params.baseDirData}/counts/telescope", mode: 'copy', pattern: '*'
 
     input:
-
-    output:
+        tuple val(metadata), path(bam), val(toolIDs)
+        path annotations
 
     script:
+        // update toolID and set suffix
+        toolIDs += 'teA'
+        suffix = toolIDs ? "__${toolIDs.join('_')}" : ''
+
+        """
+        telescope assign \
+            --attribute transcript_id \
+            ${bam} ${annotations}
+        """
+    
+    stub:
         """
         """
 }
