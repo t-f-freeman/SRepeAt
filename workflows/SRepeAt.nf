@@ -46,7 +46,8 @@ include { SeqtkSample           as SeqtkSample        } from "${baseDir}/modules
 include { ContaminantStatsQCSWF as ContaminantStatsQC } from "${baseDir}/subworkflows/align/ContaminantStatsQCSWF.nf"
 include { PreseqSWF             as Preseq             } from "${baseDir}/subworkflows/align/PreseqSWF.nf"
 include { DeepToolsMultiBamSWF  as DeepToolsMultiBam  } from "${projectDir}/subworkflows/align/DeepToolsMultiBamSWF.nf"
-include { FeatureCountsSWF      as FeatureCounts      } from "${projectDir}/subworkflows/counts/FeatureCountsSWF.nf"
+include { FeatureCountsSWF      as FeatureCountsGenes } from "${projectDir}/subworkflows/counts/FeatureCountsSWF.nf"
+include { FeatureCountsSWF      as FeatureCountsRepeats } from "${projectDir}/subworkflows/counts/FeatureCountsSWF.nf"
 include { TelescopeSWF          as Telescope          } from "${projectDir}/subworkflows/counts/TelescopeSWF.nf"
 include { FullMultiQC           as FullMultiQC        } from "${baseDir}/modules/misc/FullMultiQC.nf"
 
@@ -273,7 +274,7 @@ workflow SRepeAt {
     */
 
     // count reads in gene exons
-    FeatureCounts(
+    FeatureCountsGenes(
         ch_alignmentsCollect.bam.collect(),
         ch_alignmentsCollect.toolIDs.first(),
         genome['genes'],
@@ -281,8 +282,8 @@ workflow SRepeAt {
         'gene_id',
         outBasePrefix
     )
-    ch_countsFeatureCounts  = FeatureCounts.out.countsFeatureCounts
-    ch_summaryFeatureCounts = FeatureCounts.out.summaryFeatureCounts
+    ch_countsFeatureCountsGenes  = FeatureCountsGenes.out.countsFeatureCounts
+    ch_summaryFeatureCountsGenes = FeatureCountsGenes.out.summaryFeatureCounts
 
     
     if (!params.skipTelescope) {
@@ -311,7 +312,7 @@ workflow SRepeAt {
         .concat(ch_corMatrix)
         .concat(ch_PCAMatrix)
         .concat(
-            ch_summaryFeatureCounts.map {
+            ch_summaryFeatureCountsGenes.map {
                 it[0]
             }
         )
