@@ -12,6 +12,7 @@ workflow FeatureCountsSWF {
         toolIDs
         annotationFile
         featureType
+        attributeType
         outName
 
     main:
@@ -20,6 +21,7 @@ workflow FeatureCountsSWF {
             toolIDs,
             annotationFile,
             featureType,
+            attributeType,
             outName
         )
 
