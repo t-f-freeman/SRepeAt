@@ -283,11 +283,15 @@ workflow SRepeAt {
     ch_countsFeatureCounts  = FeatureCounts.out.countsFeatureCounts
     ch_summaryFeatureCounts = FeatureCounts.out.summaryFeatureCounts
 
-    // count reads in repeats
-    Telescope(
-        ch_bamIndexedGenome,
-        genome['repeatMasker']
-    )
+    
+    if (!params.skipTelescope) {
+        // count reads in repeats
+        Telescope(
+            ch_bamIndexedGenome,
+            genome['repeatMasker']
+        )
+    }
+
 
     /*
     ---------------------------------------------------------------------
