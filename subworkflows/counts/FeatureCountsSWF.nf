@@ -8,21 +8,17 @@ include { FeatureCounts } from "${projectDir}/modules/counts/FeatureCounts.nf"
 
 workflow FeatureCountsSWF {
     take:
-        bams
-        toolIDs
+        bamIndexed
         annotationFile
         featureType
         attributeType
-        outName
 
     main:
         FeatureCounts(
-            bams,
-            toolIDs,
+            bamIndexed,
             annotationFile,
             featureType,
             attributeType,
-            outName
         )
 
     emit:

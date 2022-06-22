@@ -15,21 +15,19 @@ process FeatureCounts {
     publishDir "${params.baseDirData}/counts", mode: 'copy', pattern: '*.txt*'
 
     input:
-        path bams
-        val toolIDsBams
+        tuple val(metadata), path(bam), path(bai), val(toolIDs)
         path annotationFile
         val featureType
         val attributeType
-        val outName
 
     output:
-        tuple path('*txt'), val(toolIDsBams), emit: featCounts
-        tuple path('*txt.summary'), val(toolIDsBams), emit: featCountsSummary
+        tuple path('*txt'), val(toolIDs), emit: featCounts
+        tuple path('*txt.summary'), val(toolIDs), emit: featCountsSummary
 
     script:
         // set suffix
-        toolIDsBams += "srF-${annotationFile.toString() - ~/.gtf?/}"
-        suffix = toolIDsBams ? "__${toolIDsBams.join('_')}" : ''
+        toolIDs += "srF-${annotationFile.toString() - ~/.gtf?/}"
+        suffix = toolIDs ? "__${toolIDs.join('_')}" : ''
 
         // set arguments
         def options = task.ext.args ?: ''
@@ -40,17 +38,17 @@ process FeatureCounts {
             ${options} \
             -a ${annotationFile} -F GTF \
             -t ${featureType} -g ${attributeType} \
-            -o ${outName}${suffix}.txt \
-            ${bams}
+            -o ${metadata.sampleName}${suffix}.txt \
+            ${bam}
         """
     
     stub:
         // set suffix
-        toolIDsBams += "srF"
-        suffix = toolIDsBams ? "__${toolIDsBams.join('_')}" : ''
+        toolIDs += "srF-${annotationFile.toString() - ~/.gtf?/}"
+        suffix = toolIDs ? "__${toolIDs.join('_')}" : ''
 
         """
-        touch ${outName}${suffix}.txt
-        touch ${outName}${suffix}.txt.summary
+        touch ${metadata.sampleName}${suffix}.txt
+        touch ${metadata.sampleName}${suffix}.txt.summary
         """
 }
