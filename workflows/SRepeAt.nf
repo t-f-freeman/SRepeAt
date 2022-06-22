@@ -275,12 +275,10 @@ workflow SRepeAt {
 
     // count reads in gene exons
     FeatureCountsGenes(
-        ch_alignmentsCollect.bam.collect(),
-        ch_alignmentsCollect.toolIDs.first(),
+        ch_bamIndexedGenome,
         genome['genes'],
         'exon',
         'gene_id',
-        outBasePrefix
     )
     ch_countsFeatureCountsGenes  = FeatureCountsGenes.out.countsFeatureCounts
     ch_summaryFeatureCountsGenes = FeatureCountsGenes.out.summaryFeatureCounts
@@ -288,12 +286,10 @@ workflow SRepeAt {
 
     // count reads in repeats
     FeatureCountsRepeats(
-        ch_alignmentsCollect.bam.collect(),
-        ch_alignmentsCollect.toolIDs.first(),
+        ch_bamIndexedGenome,
         genome['repeatMasker'],
         'exon',
         'transcript_id',
-        outBasePrefix
     )
     ch_countsFeatureCountsRepeats  = FeatureCountsRepeats.out.countsFeatureCounts
     ch_summaryFeatureCountsRepeats = FeatureCountsRepeats.out.summaryFeatureCounts
