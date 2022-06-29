@@ -100,6 +100,10 @@
                 "default"     : false,
                 "description" : "Force alignment of raw reads even if read trimming is performed."
             },
+            "numberPrimaryAlignments" : {
+                "default"     : 50,
+                "description" : "Number of valid, distinct primary alignments for alignment tool to search for. This is option `-k` for HISAT2 and bowtie2."
+            },
             "forceUseHisat2Index" : {
                 "default"     : true,
                 "description" : "Use the provided HISAT2 index if it is supplied."
